@@ -1,6 +1,7 @@
 package com.podolian.vamatestapp.app
 
 import android.app.Application
+import com.podolian.database.di.databaseModule
 import com.podolian.vamatestapp.di.appModule
 import com.podolian.vamatestapp.di.dataModule
 import com.podolian.vamatestapp.di.domainModule
@@ -18,7 +19,7 @@ class VamaApp : Application() {
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@VamaApp)
-            modules(listOf(appModule, domainModule, dataModule, networkModule))
+            modules(listOf(appModule, domainModule, dataModule, networkModule, databaseModule))
         }
     }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.podolian.domain.model.Feed
 import com.podolian.domain.model.RequestParams
 import com.podolian.domain.usecase.FetchAlbumsCase
+import com.podolian.domain.usecase.RetrievePersistedDataCase
 import com.podolian.vamatestapp.presentation.BaseViewModel
 import com.podolian.vamatestapp.presentation.KEY_ERROR_TEXT
 import kotlinx.coroutines.flow.*
@@ -17,8 +18,11 @@ data class UiState(
 )
 
 class AlbumViewModel(
-    private val fetchAlbumsCase: FetchAlbumsCase
+    private val fetchAlbumsCase: FetchAlbumsCase,
+    retrievePersistedDataCase: RetrievePersistedDataCase,
 ) : BaseViewModel<UiState>(UiState()) {
+
+    private val persistedDataStream = retrievePersistedDataCase(RequestParams())
 
     init {
         fetchAlbums()
@@ -31,9 +35,15 @@ class AlbumViewModel(
                     _uiState.tryEmit(uiState.value.copy(isLoading = true))
                 }
                 .catch {
-                    val data = HashMap<String, Any?>()
-                    data[KEY_ERROR_TEXT] = it.message
-                    _uiState.tryEmit(uiState.value.copy(isError = true, errorData = data))
+                    persistedDataStream.collect { persistedData ->
+                        if (persistedData != null) {
+                            _uiState.tryEmit(uiState.value.copy(isLoading = false, feed = persistedData))
+                        } else {
+                            val data = HashMap<String, Any?>()
+                            data[KEY_ERROR_TEXT] = it.message
+                            _uiState.tryEmit(uiState.value.copy(isError = true, errorData = data))
+                        }
+                    }
                     it.printStackTrace()
                 }
                 .collect {

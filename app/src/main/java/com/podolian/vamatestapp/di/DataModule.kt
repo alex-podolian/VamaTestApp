@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val dataModule = module {
     single<DataRepository> {
-        DataRepositoryImpl(remoteSource = get())
+        DataRepositoryImpl(localSource = get(), remoteSource = get())
     }
 }

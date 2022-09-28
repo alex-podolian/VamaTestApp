@@ -111,7 +111,7 @@ fun AlbumDetailsScreen(
                         color = Gray100,
                         fontSize = 12.sp
                     )
-                    data.artistUrl?.let {
+                    data.url?.let {
                         Button(
                             onClick = {
                                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
