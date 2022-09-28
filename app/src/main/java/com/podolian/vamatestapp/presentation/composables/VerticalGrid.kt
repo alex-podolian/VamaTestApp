@@ -7,23 +7,21 @@ import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import com.podolian.domain.model.Feed
-import com.podolian.domain.model.Result
+import com.podolian.domain.model.ItemData
 import com.podolian.vamatestapp.R
 import com.podolian.vamatestapp.action.OpenAlbumDetailsScreen
 import com.podolian.vamatestapp.action.contract.ActionExecutor
 import com.podolian.vamatestapp.ui.theme.Gradient
-import com.podolian.vamatestapp.ui.theme.Gray
+import com.podolian.vamatestapp.ui.theme.Gray100
 
 @Composable
 fun VerticalGrid(
@@ -43,7 +41,7 @@ fun VerticalGrid(
         modifier = modifier.animateContentSize()
     ) {
         items(feed.results, key = { it.id }) { data ->
-            GridItem(data = data, executor = executor)
+            GridItem(data = data, copyright = feed.copyright, executor = executor)
         }
     }
 }
@@ -51,7 +49,8 @@ fun VerticalGrid(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun GridItem(
-    data: Result,
+    data: ItemData,
+    copyright: String,
     executor: ActionExecutor?,
     modifier: Modifier = Modifier
 ) {
@@ -59,7 +58,7 @@ fun GridItem(
         modifier = modifier
             .aspectRatio(1f)
             .clip(RoundedCornerShape(dimensionResource(id = R.dimen.card_corner_radius))),
-        onClick = { executor?.invoke(OpenAlbumDetailsScreen(data)) }
+        onClick = { executor?.invoke(OpenAlbumDetailsScreen(data, copyright)) }
     ) {
         DynamicImage(imageUrl = data.artworkUrl100, modifier = Modifier.fillMaxSize())
         Box(
@@ -80,23 +79,19 @@ fun GridItem(
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Bottom
         ) {
-            Text(
+            DynamicText(
                 text = data.name,
+                fontSize = 16.sp,
+                color = Color.White,
                 maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                style = TextStyle(
-                    color = Color.White,
-                    fontSize = 16.sp
-                )
+                overflow = TextOverflow.Ellipsis
             )
-            Text(
+            DynamicText(
                 text = data.artistName,
+                color = Gray100,
+                fontSize = 12.sp,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                style = TextStyle(
-                    color = Gray,
-                    fontSize = 12.sp,
-                )
             )
         }
     }

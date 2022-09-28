@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">VamaTestApp</string>
     <string name="top_albums">Top 100 Albums</string>
+    <string name="release_date">Released %s</string>
+    <string name="full_date_pattern">yyyy-MM-dd</string>
+    <string name="month_year_pattern">MMMM dd, yyyy</string>
+    <string name="visit">Visit The Album</string>
+    <string name="broken_url">Can\'t visit album\'s page. Url is broken.</string>
+
+
 </resources>

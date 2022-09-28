@@ -9,7 +9,7 @@ internal fun LocalGenre.toDomain() = Genre(
     url = this.url
 )
 
-internal fun LocalResult.toDomain() = Result(
+internal fun LocalItemData.toDomain() = ItemData(
     artistName = this.artistName,
     id = this.id,
     name = this.name,
@@ -45,7 +45,7 @@ internal fun Genre.toLocal() = LocalGenre(
     url = this.url
 )
 
-internal fun Result.toLocal() = LocalResult(
+internal fun ItemData.toLocal() = LocalItemData(
     artistName = this.artistName,
     id = this.id,
     name = this.name,

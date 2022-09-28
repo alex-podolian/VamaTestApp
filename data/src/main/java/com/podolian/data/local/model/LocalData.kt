@@ -9,7 +9,7 @@ data class LocalFeed(
     val country: String,
     val icon: String,
     val updated: String,
-    val results: List<LocalResult>
+    val results: List<LocalItemData>
 )
 
 data class LocalAuthor(
@@ -21,7 +21,7 @@ data class LocalLink(
     val self: String
 )
 
-data class LocalResult(
+data class LocalItemData(
     val artistName: String,
     val id: String,
     val name: String,

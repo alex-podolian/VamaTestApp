@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="padding_large">24dp</dimen>
     <dimen name="padding_middle">16dp</dimen>
     <dimen name="padding_small">12dp</dimen>
+    <dimen name="padding_extra_small">8dp</dimen>
+    <dimen name="padding_smallest">4dp</dimen>
+    <dimen name="padding_bottom">50dp</dimen>
     <dimen name="card_corner_radius">16dp</dimen>
+    <dimen name="button_corner_radius">10dp</dimen>
     <dimen name="toolbar_height_restored">65dp</dimen>
     <dimen name="toolbar_height_collapsed">43dp</dimen>
+    <dimen name="button_height">45dp</dimen>
+    <dimen name="button_padding">20dp</dimen>
 </resources>

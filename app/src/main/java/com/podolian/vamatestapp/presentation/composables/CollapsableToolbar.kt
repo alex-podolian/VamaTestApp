@@ -5,13 +5,11 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
@@ -54,16 +52,14 @@ fun CollapsableToolbar(
             exit = fadeOut(animationSpec = tween(durationMillis = 100))
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
-                Text(
+                DynamicText(
                     modifier = Modifier
                         .align(Alignment.TopCenter)
                         .padding(top = dimensionResource(id = R.dimen.padding_small) + topPadding),
                     text = text,
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
-                    )
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
                 )
             }
         }
@@ -80,7 +76,7 @@ fun CollapsableToolbar(
             )
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
-                Text(
+                DynamicText(
                     modifier = Modifier
                         .align(Alignment.TopStart)
                         .padding(
@@ -88,11 +84,9 @@ fun CollapsableToolbar(
                             top = dimensionResource(id = R.dimen.padding_small) + topPadding
                         ),
                     text = text,
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 34.sp
-                    )
+                    color = Color.Black,
+                    fontSize = 34.sp,
+                    fontWeight = FontWeight.Bold
                 )
             }
         }

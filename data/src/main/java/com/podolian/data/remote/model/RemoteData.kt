@@ -6,7 +6,7 @@ data class RemoteGenre(
     val url: String
 )
 
-data class RemoteResult(
+data class RemoteItemData(
     val artistName: String,
     val id: String,
     val name: String,
@@ -38,5 +38,5 @@ data class RemoteFeed(
     val country: String,
     val icon: String,
     val updated: String,
-    val results: List<RemoteResult>
+    val results: List<RemoteItemData>
 )

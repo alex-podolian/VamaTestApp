@@ -9,7 +9,7 @@ internal fun NetworkGenre.toRemote() = RemoteGenre(
     url = this.url
 )
 
-internal fun NetworkResult.toRemote() = RemoteResult(
+internal fun NetworkResult.toRemote() = RemoteItemData(
     artistName = this.artistName,
     id = this.id,
     name = this.name,
