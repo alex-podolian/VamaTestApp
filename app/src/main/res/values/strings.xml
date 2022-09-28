@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">VamaTestApp</string>
+    <string name="top_albums">Top 100 Albums</string>
 </resources>

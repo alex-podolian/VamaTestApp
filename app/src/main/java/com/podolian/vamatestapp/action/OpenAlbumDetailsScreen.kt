@@ -1,9 +1,9 @@
 package com.podolian.vamatestapp.action
 
 import androidx.navigation.NavController
-import com.podolian.domain.model.Feed
 import com.podolian.vamatestapp.action.contract.Action
+import com.podolian.domain.model.Result
 
-class OpenAlbumDetailsScreen(var feed: Feed) : Action {
+class OpenAlbumDetailsScreen(var result: Result) : Action {
     override suspend fun invoke(navController: NavController) {}
 }
