@@ -10,6 +10,9 @@ import com.podolian.domain.model.Feed
 import com.podolian.vamatestapp.action.contract.ActionExecutor
 import org.koin.androidx.compose.getViewModel
 import com.podolian.vamatestapp.R
+import com.podolian.vamatestapp.action.OpenErrorScreen
+import com.podolian.vamatestapp.action.RetryAction
+import com.podolian.vamatestapp.presentation.KEY_RETRY_ACTION
 import com.podolian.vamatestapp.presentation.composables.CollapsableToolbar
 import com.podolian.vamatestapp.presentation.composables.LoadingIndicator
 import com.podolian.vamatestapp.presentation.composables.ToolbarState
@@ -27,7 +30,15 @@ fun AlbumsScreen(
     }
 
     if (state.isError) {
-
+        state.errorData?.let { data ->
+            val retryAction = object : RetryAction() {
+                override fun invoke() {
+                    viewModel.fetchAlbums()
+                }
+            }
+            data[KEY_RETRY_ACTION] = retryAction
+            executor?.invoke(OpenErrorScreen(data))
+        }
     }
 
     if (state.feed != null) {

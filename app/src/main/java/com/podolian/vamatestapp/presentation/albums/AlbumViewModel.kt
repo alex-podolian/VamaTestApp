@@ -5,13 +5,15 @@ import com.podolian.domain.model.Feed
 import com.podolian.domain.model.RequestParams
 import com.podolian.domain.usecase.FetchAlbumsCase
 import com.podolian.vamatestapp.presentation.BaseViewModel
+import com.podolian.vamatestapp.presentation.KEY_ERROR_TEXT
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 data class UiState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
-    val feed: Feed? = null
+    val feed: Feed? = null,
+    val errorData: HashMap<String, Any?>? = null
 )
 
 class AlbumViewModel(
@@ -22,14 +24,16 @@ class AlbumViewModel(
         fetchAlbums()
     }
 
-    private fun fetchAlbums() {
+    fun fetchAlbums() {
         viewModelScope.launch {
             fetchAlbumsCase(RequestParams())
                 .onStart {
                     _uiState.tryEmit(uiState.value.copy(isLoading = true))
                 }
                 .catch {
-                    _uiState.tryEmit(uiState.value.copy(isError = true))
+                    val data = HashMap<String, Any?>()
+                    data[KEY_ERROR_TEXT] = it.message
+                    _uiState.tryEmit(uiState.value.copy(isError = true, errorData = data))
                     it.printStackTrace()
                 }
                 .collect {

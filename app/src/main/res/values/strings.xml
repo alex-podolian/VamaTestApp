@@ -6,6 +6,9 @@
     <string name="month_year_pattern">MMMM dd, yyyy</string>
     <string name="visit">Visit The Album</string>
     <string name="broken_url">Can\'t visit album\'s page. Url is broken.</string>
+    <string name="no_internet_connection">There is no internet connection</string>
+    <string name="checkInternet">Please check your internet connection and try again later</string>
+    <string name="retry">Retry</string>
 
 
 </resources>

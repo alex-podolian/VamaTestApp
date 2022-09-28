@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,14 +20,20 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.podolian.domain.model.ItemData
 import com.podolian.vamatestapp.action.OpenAlbumDetailsScreen
 import com.podolian.vamatestapp.action.OpenErrorScreen
+import com.podolian.vamatestapp.action.RetryAction
 import com.podolian.vamatestapp.action.contract.ActionExecutor
 import com.podolian.vamatestapp.presentation.albumdetails.AlbumDetailsScreen
 import com.podolian.vamatestapp.ui.theme.VamaTestAppTheme
 import com.podolian.vamatestapp.presentation.albums.AlbumsScreen
+import com.podolian.vamatestapp.presentation.error.ErrorScreen
+import java.io.Serializable
 
 private const val NAV_ROUTE_ALBUM_DETAILS_SCREEN = "AlbumDetailsScreen"
 private const val NAV_ROUTE_ALBUMS_SCREEN = "AlbumsScreen"
 private const val NAV_ROUTE_ERROR_SCREEN = "ErrorScreen"
+
+const val KEY_ERROR_TEXT = "errorText"
+const val KEY_RETRY_ACTION = "retryAction"
 
 class MainActivity : ComponentActivity() {
 
@@ -62,7 +69,10 @@ class MainActivity : ComponentActivity() {
                             resId?.let { navController.navigate(it, bundle) }
                         }
                         is OpenErrorScreen -> {
-                            //TODO: add handling
+                            val bundle = Bundle()
+                            bundle.putSerializable("data", action.data)
+                            val resId = navController.findDestination(NAV_ROUTE_ERROR_SCREEN)?.id
+                            resId?.let { navController.navigate(it, bundle) }
                         }
                     }
                 }
@@ -85,13 +95,24 @@ class MainActivity : ComponentActivity() {
                                 AlbumDetailsScreen(data as ItemData, copyright, navController)
                             }
                             composable(NAV_ROUTE_ERROR_SCREEN) { backStackEntry ->
-                                //TODO: add handling
+                                val data = backStackEntry.arguments?.getSerializable("data")
+                                OpenErrorScreen(data)
                             }
                         }
                     }
                 }
 
             }
+        }
+    }
+
+    @Composable
+    private fun OpenErrorScreen(data: Serializable?) {
+        val retryAction = (data as HashMap<*, *>)[KEY_RETRY_ACTION] as RetryAction
+        val errorText = data[KEY_ERROR_TEXT] as String
+        ErrorScreen(errorText) {
+            navController.navigate(NAV_ROUTE_ALBUMS_SCREEN)
+            retryAction.invoke()
         }
     }
 }

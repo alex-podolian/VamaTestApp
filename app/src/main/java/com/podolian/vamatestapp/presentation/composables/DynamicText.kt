@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 
@@ -16,6 +17,7 @@ fun DynamicText(
     color: Color,
     fontSize: TextUnit,
     fontWeight: FontWeight = FontWeight.Normal,
+    textAlign: TextAlign = TextAlign.Left,
     maxLines: Int = 1,
     overflow: TextOverflow = TextOverflow.Ellipsis
 ) {
@@ -27,6 +29,7 @@ fun DynamicText(
             fontSize = fontSize,
             fontWeight = fontWeight
         ),
+        textAlign = textAlign,
         maxLines = maxLines,
         overflow = overflow
     )
