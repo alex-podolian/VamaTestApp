@@ -6,4 +6,4 @@ Test app based on [https://rss.applemarketingtools.com/](https://rss.applemarket
 
 ## Demo video
 
-![demo video](device-2022-09-28-205216.mp4)
+![demo video](device-2022-09-29-171903.mp4)
