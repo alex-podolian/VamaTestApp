@@ -22,6 +22,8 @@ import com.podolian.vamatestapp.action.OpenAlbumDetailsScreen
 import com.podolian.vamatestapp.action.contract.ActionExecutor
 import com.podolian.vamatestapp.ui.theme.Gradient
 import com.podolian.vamatestapp.ui.theme.Gray100
+import com.podolian.vamatestapp.ui.theme.textStyle
+import com.podolian.vamatestapp.ui.theme.textStyle2
 
 @Composable
 fun VerticalGrid(
@@ -81,15 +83,13 @@ fun GridItem(
         ) {
             DynamicText(
                 text = data.name,
-                fontSize = 16.sp,
-                color = Color.White,
+                style = textStyle2,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
             DynamicText(
                 text = data.artistName,
-                color = Gray100,
-                fontSize = 12.sp,
+                style = textStyle,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
             )

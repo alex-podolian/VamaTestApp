@@ -57,13 +57,8 @@ fun AlbumDetailsScreen(
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Column {
-                    DynamicText(text = data.artistName, color = Gray200, fontSize = 18.sp)
-                    DynamicText(
-                        text = data.name,
-                        color = Dark,
-                        fontSize = 34.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                    DynamicText(text = data.artistName, style = MaterialTheme.typography.body1)
+                    DynamicText(text = data.name, style = textStyle3)
                     Row(
                         modifier = Modifier
                             .padding(vertical = dimensionResource(id = R.dimen.padding_extra_small))
@@ -102,17 +97,16 @@ fun AlbumDetailsScreen(
                             id = R.string.release_date,
                             data.releaseDate.formatDate(context)
                         ),
-                        color = Gray100,
-                        fontSize = 12.sp
+                        style = textStyle
                     )
                     DynamicText(
                         modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_large)),
                         text = copyright,
-                        color = Gray100,
-                        fontSize = 12.sp
+                        style = textStyle
                     )
                     data.url?.let {
                         Button(
+                            modifier = Modifier.height(dimensionResource(id = R.dimen.button_height)),
                             onClick = {
                                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
                                 try {
@@ -125,13 +119,11 @@ fun AlbumDetailsScreen(
                             },
                             colors = ButtonDefaults.buttonColors(backgroundColor = Blue),
                             shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
-                            contentPadding = PaddingValues(horizontal = dimensionResource(id = R.dimen.button_padding)),
-                            modifier = Modifier.height(dimensionResource(id = R.dimen.button_height))
+                            contentPadding = PaddingValues(horizontal = dimensionResource(id = R.dimen.button_padding))
                         ) {
                             DynamicText(
                                 text = stringResource(id = R.string.visit),
-                                color = Color.White,
-                                fontSize = 16.sp
+                                style = textStyle2
                             )
                         }
                     }

@@ -14,6 +14,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import com.podolian.vamatestapp.R
+import com.podolian.vamatestapp.ui.theme.textStyle2
+import com.podolian.vamatestapp.ui.theme.textStyle3
 
 enum class ToolbarState {
     COLLAPSED,
@@ -57,9 +59,7 @@ fun CollapsableToolbar(
                         .align(Alignment.TopCenter)
                         .padding(top = dimensionResource(id = R.dimen.padding_small) + topPadding),
                     text = text,
-                    color = Color.Black,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
+                    style = MaterialTheme.typography.subtitle1
                 )
             }
         }
@@ -84,9 +84,7 @@ fun CollapsableToolbar(
                             top = dimensionResource(id = R.dimen.padding_small) + topPadding
                         ),
                     text = text,
-                    color = Color.Black,
-                    fontSize = 34.sp,
-                    fontWeight = FontWeight.Bold
+                    style = textStyle3
                 )
             }
         }
